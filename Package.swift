@@ -8,13 +8,15 @@ let package = Package(
     products: [
         .library(name: "Fuzi", targets: ["Fuzi"]),
     ],
+    dependencies: [
+        .package(url: "https://github.com/ndavon/Clibxml2.git", from: "1.0.0"),
+    ],
     targets: [
         .target(name: "Fuzi",
-            path: "Sources",
-            
+            path: "Sources"
             // Headers and linking for libxml2
-            cSettings: [.headerSearchPath("$(SDKROOT)/usr/include/libxml2")],
-            linkerSettings: [.linkedLibrary("xml2")]
+//            cSettings: [.headerSearchPath("$(SDKROOT)/usr/include/libxml2")],
+//            linkerSettings: [.linkedLibrary("xml2")]
         ),
         .testTarget(name: "FuziTests",
                     dependencies: ["Fuzi"],
