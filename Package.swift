@@ -8,11 +8,16 @@ let package = Package(
     products: [
         .library(name: "Fuzi", targets: ["Fuzi"]),
     ],
-    dependencies: [
-        .package(url: "https://github.com/ndavon/Clibxml2.git", from: "1.0.0"),
-    ],
     targets: [
+        .systemLibrary(
+                name: "libxmlKanna",
+                path: "Modules",
+                pkgConfig: "libxml-2.0",
+                providers: [
+                    .brew(["libxml2"])
+                ]),
         .target(name: "Fuzi",
+            dependencies: ["libxmlKanna"],
             path: "Sources"
         ),
         .testTarget(name: "FuziTests",
@@ -21,3 +26,37 @@ let package = Package(
         )
     ]
 )
+
+/**
+ 
+ import PackageDescription
+
+ let package = Package(
+     name: "Kanna",
+     products: [
+       .library(name: "Kanna", targets: ["Kanna"]),
+     ],
+     targets: [
+         .systemLibrary(
+                 name: "libxmlKanna",
+                 path: "Modules",
+                 pkgConfig: "libxml-2.0",
+                 providers: [
+                     .brew(["libxml2"]),
+                     .apt(["libxml2-dev"])
+                 ]),
+         .target(name: "Kanna",
+                 dependencies: ["libxmlKanna"],
+                 path: "Sources",
+                 exclude: [
+                     "Sources/Info.plist",
+                     "Sources/Kanna.h",
+                     "Tests/KannaTests/Data"
+                 ]),
+         .testTarget(name: "KannaTests",
+                     dependencies: ["Kanna"]
+                 )
+     ]
+ )
+ 
+ */
