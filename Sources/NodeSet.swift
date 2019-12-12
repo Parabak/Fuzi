@@ -20,7 +20,7 @@
 // THE SOFTWARE.
 
 import Foundation
-import libxml2
+import libxmlKanna
 
 /// An enumerable set of XML nodes
 open class NodeSet: Collection {
